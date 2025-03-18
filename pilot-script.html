@@ -34,6 +34,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="pilot-script_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="pilot-script_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="pilot-script_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="pilot-script_files/libs/table1-1.0/table1_defaults.css" rel="stylesheet">
+
 
 
 </head>
@@ -71,9 +73,99 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="sample" class="level2">
 <h2 class="anchored" data-anchor-id="sample">Sample</h2>
+<p>People were recruited who:</p>
+<ul>
+<li>currently live in Austria</li>
+<li>are the primary grocery shopper</li>
+</ul>
+<p>Most respondents live in a 2-person household, no children.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="Rtable1">
+<table class="Rtable1 caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th class="rowlabel firstrow lastrow" data-quarto-table-cell-role="th"></th>
+<th class="firstrow lastrow" data-quarto-table-cell-role="th"><span class="stratlabel">Overall<br>
+<span class="stratn">(N=100)</span></span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="rowlabel firstrow">gender</td>
+<td class="firstrow"></td>
+</tr>
+<tr class="even">
+<td class="rowlabel">Male</td>
+<td>49 (49.0%)</td>
+</tr>
+<tr class="odd">
+<td class="rowlabel">Female</td>
+<td>49 (49.0%)</td>
+</tr>
+<tr class="even">
+<td class="rowlabel">Other</td>
+<td>1 (1.0%)</td>
+</tr>
+<tr class="odd">
+<td class="rowlabel lastrow">Missing</td>
+<td class="lastrow">1 (1.0%)</td>
+</tr>
+<tr class="even">
+<td class="rowlabel firstrow">age</td>
+<td class="firstrow"></td>
+</tr>
+<tr class="odd">
+<td class="rowlabel">Mean (SD)</td>
+<td>34.5 (10.7)</td>
+</tr>
+<tr class="even">
+<td class="rowlabel lastrow">Median [Min, Max]</td>
+<td class="lastrow">32.5 [18.0, 71.0]</td>
+</tr>
+<tr class="odd">
+<td class="rowlabel firstrow">adults</td>
+<td class="firstrow"></td>
+</tr>
+<tr class="even">
+<td class="rowlabel">Mean (SD)</td>
+<td>1.98 (0.864)</td>
+</tr>
+<tr class="odd">
+<td class="rowlabel lastrow">Median [Min, Max]</td>
+<td class="lastrow">2.00 [0, 5.00]</td>
+</tr>
+<tr class="even">
+<td class="rowlabel firstrow">children</td>
+<td class="firstrow"></td>
+</tr>
+<tr class="odd">
+<td class="rowlabel">Mean (SD)</td>
+<td>0.394 (0.843)</td>
+</tr>
+<tr class="even">
+<td class="rowlabel">Median [Min, Max]</td>
+<td>0 [0, 4.00]</td>
+</tr>
+<tr class="odd">
+<td class="rowlabel lastrow">Missing</td>
+<td class="lastrow">1 (1.0%)</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
 </section>
 <section id="purchase-frequency" class="level2">
 <h2 class="anchored" data-anchor-id="purchase-frequency">Purchase frequency</h2>
+<p>This scale assesses how frequently people buy each of the foods. 1 - never, 2 - less than once a month, 3 - about once a month, 4 - 2-3 times a month, 5 - once a week, 6 - Multiple times a week.</p>
+<p>Products should be bought quite frequently as that was a criteria for the initial selection.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -91,122 +183,30 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="storage-per-product" class="level2">
-<h2 class="anchored" data-anchor-id="storage-per-product">Storage per product</h2>
+<section id="correct-storage-per-food-item" class="level2">
+<h2 class="anchored" data-anchor-id="correct-storage-per-food-item">Correct storage per food item</h2>
+<p>Below shows whether products were stored in the correct location. This means whether it is in the fridge, in the freezer, on the kitchen counter, in a cupboard or cellar. Criteria are based on information from the BMK (Bundesministerium für Klimaschutz, Umwelt, Energie, Mobilität, Innovation und Technologie) and The Netherlands Nutrition Centre (https://www.voedingscentrum.nl/nl/thema/kopen-koken-bewaren/eten-bewaren.aspx).</p>
+<p>Cucumbers and bell peppers are often stored sub-optimally. They are stored in the fridge but it is best not to store them in the fridge. (https://www.bmk.gv.at/themen/klima_umwelt/abfall/abfallvermeidung/lebensmittel/tipps/lagerung/obst_gemuese.html)</p>
+<p>According to The Netherlands Nutrition Centre, courgette loses flavour in the fridge and is best stored outside it. Though BMK advises the fridge.</p>
+<p>Most other foods are stored correctly.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="pilot-script_files/figure-html/storage%20locations-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="pilot-script_files/figure-html/correct-food-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[1]]</code></pre>
 </div>
+</section>
+<section id="storage-per-product" class="level2">
+<h2 class="anchored" data-anchor-id="storage-per-product">Storage per product</h2>
+<p>This further breaks down where each product is stored.</p>
+<div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="pilot-script_files/figure-html/storage%20locations-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-[[2]]</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="pilot-script_files/figure-html/storage%20locations-3.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-[[3]]</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="pilot-script_files/figure-html/storage%20locations-4.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-[[4]]</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="pilot-script_files/figure-html/storage%20locations-5.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-[[5]]</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="pilot-script_files/figure-html/storage%20locations-6.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-[[6]]</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="pilot-script_files/figure-html/storage%20locations-7.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-[[7]]</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="pilot-script_files/figure-html/storage%20locations-8.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-[[8]]</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="pilot-script_files/figure-html/storage%20locations-9.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-[[9]]</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="pilot-script_files/figure-html/storage%20locations-10.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-[[10]]</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="pilot-script_files/figure-html/storage%20locations-11.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="pilot-script_files/figure-html/compact-storage-loc-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -214,11 +214,62 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="foods-going-off" class="level2">
 <h2 class="anchored" data-anchor-id="foods-going-off">Foods going off</h2>
+<p>This figure shows mean scores for the question how often a food goes bad before being able to finish it, rated on a 7-point scale from 1 - Never to 7 - (almost) always.</p>
+<p>Overall, people indicate that their food very rarely goes bad before use, with the overall mean falling somewhere between almost never and rarely.</p>
+<p>Especially of interest are the products which are stored suboptimally: cucumber and bell peppers. However, these are among the products which go off the least frequently.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
 <p><img src="pilot-script_files/figure-html/food%20expiry-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="correct-packaging-per-food-item" class="level2">
+<h2 class="anchored" data-anchor-id="correct-packaging-per-food-item">Correct packaging per food item</h2>
+<p>This shows whether food products were packaged correctly when stored. Below is more detailed information about how the products are stored.</p>
+<p>This is not a great representation of the data as it is less wrong/correct and more perfect/good, as for many products it isn’t that clearly bad.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="pilot-script_files/figure-html/correct%20packaging-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="storage-specifics-per-food" class="level2">
+<h2 class="anchored" data-anchor-id="storage-specifics-per-food">Storage specifics per food</h2>
+<p>maybe most interesting stuff:</p>
+<ul>
+<li>bread often stored airtight but it is best to allow some airflow, as airtight packaging may trap moisture and mould the bread. Though it’s also not a very big deal.</li>
+<li>lettuce: very few people use the ‘stalk in water’ technique for storing their lettuce, which could be prolong the shelf life.</li>
+<li>anana: no one wraps the top in foil to stop the produced ethylene from spreading, which may affect the bananas themselves and surrounding products</li>
+<li>berries: they are somewhat more often thrown away and also packaged suboptimally. Airtight packaging and washing should be avoided. The moisture will make them go mouldy quicker.</li>
+<li>herbs: packaging varies a lot, the best being in a glass of water of wrapped in a moist towel. Though herbs are not bought very often.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="pilot-script_files/figure-html/storage-how-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="pilot-script_files/figure-html/storage-how-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="pilot-script_files/figure-html/storage-how-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>

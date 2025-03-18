@@ -15,6 +15,9 @@ library(dplyr)
 library(gtsummary)
 library(ggplot2)
 library(tidyr)
+library(purrr)
+library(patchwork)
+library(table1)
 
 # import data
 wd <- list()
@@ -50,11 +53,154 @@ frequency_levels <- c("Never",
 
 loc_labels <- c("Fridge", "Freezer", "Pantry/cupboard", 
             "Kitchen Counter", "Cellar/Garage", "Other")
+
+# recode storage into correct/wrong
+df <- df %>% mutate(
+  br_loc = case_when(
+    is.na(br_1_1) & is.na(br_1_2) & is.na(br_1_3) & is.na(br_1_4) & is.na(br_1_5) ~ NA_character_,
+    br_1_1 == 1 ~ "wrong", 
+    br_1_2 == 1 ~ "correct", 
+    br_1_3 == 1 ~ "correct", 
+    br_1_4 == 1 ~ "correct", 
+    br_1_5 == 1 ~ "correct", 
+    TRUE ~ "wrong"
+  ),
+  pot_loc = case_when(
+    is.na(pot_1) ~ NA_character_,
+    pot_1 %in% c(3, 5) ~ "correct",
+    TRUE ~ "wrong"
+  ),
+  bro_loc = case_when(
+    is.na(bro_1) ~ NA_character_,
+    bro_1 %in% c(1, 2) ~ "correct",
+    TRUE ~ "wrong"
+  ),
+  let_loc = case_when(
+    is.na(let_1) ~ NA_character_,
+    let_1 == 1 ~ "correct",
+    TRUE ~ "wrong"
+  ),
+  cu_loc = case_when(
+    is.na(cu_1) ~ NA_character_,
+    cu_1 %in% c(3, 4, 5) ~ "correct",
+    TRUE ~ "wrong"
+  ),
+  ba_loc = case_when(
+    is.na(ba_1) ~ NA_character_,
+    ba_1 %in% c(2, 3, 4, 5) ~ "correct",
+    TRUE ~ "wrong"
+  ),
+  ap_loc = case_when(
+    is.na(ap_1) ~ NA_character_,
+    ap_1 %in% c(1, 2) ~ "correct",
+    TRUE ~ "okay"
+  ),
+  be_loc = case_when(
+    is.na(be_1) ~ NA_character_,
+    be_1 %in% c(1, 2) ~ "correct",
+    TRUE ~ "wrong"
+  ),
+  he_loc = case_when(
+    is.na(he_1) ~ NA_character_,
+    he_1 %in% c(1, 2) ~ "correct",
+    TRUE ~ "wrong"
+  ),
+  pep_loc = case_when(
+    is.na(pep_1) ~ NA_character_,
+    pep_1 %in% c(2, 3, 4, 5) ~ "correct",
+    TRUE ~ "wrong"
+  ),
+  co_loc = case_when(
+    is.na(co_1) ~ NA_character_,
+    co_1 %in% c(1, 2, 3, 4, 5) ~ "correct",
+    TRUE ~ "wrong"
+  )
+)
+
+df <- df %>%
+  mutate(across(88:98, ~ factor(., levels = c("wrong", "correct")))) # 1 = wrong; 2 = correct
+
+df <- df %>% mutate(
+  br_pack = case_when(
+    is.na(br_2_1) & is.na(br_2_2) & is.na(br_2_3) & is.na(br_2_4) ~ NA_character_,
+    br_2_1 == 1 ~ "wrong", 
+    br_2_2 == 1 ~ "wrong", 
+    br_2_3 == 1 ~ "correct", 
+    br_2_4 == 1 ~ "wrong", 
+    TRUE ~ "wrong"
+  ),
+  bro_pack = case_when(
+    is.na(bro_2_1) & is.na(bro_2_2) & is.na(bro_2_3) & is.na(bro_2_4) ~ NA_character_,
+    br_2_1 == 1 ~ "wrong", 
+    br_2_2 == 1 ~ "wrong", 
+    br_2_3 == 1 ~ "correct", 
+    br_2_4 == 1 ~ "wrong", 
+    TRUE ~ "wrong"
+  ),
+  let_pack = case_when(
+    is.na(let_2_1) & is.na(let_2_2) & is.na(let_2_3) & is.na(let_2_4) & is.na(let_2_5) ~ NA_character_,
+    let_2_1 == 1 ~ "wrong", 
+    let_2_2 == 1 ~ "wrong", 
+    let_2_3 == 1 ~ "correct", 
+    let_2_4 == 1 ~ "correct", 
+    let_2_5 == 1 ~ "wrong",
+    TRUE ~ "wrong"
+  ),
+  ba_pack = case_when(
+    is.na(ba_2_1) & is.na(ba_2_2) & is.na(ba_2_3) & is.na(ba_2_4) & is.na(ba_2_5) ~ NA_character_,
+    ba_2_1 == 1 ~ "correct", 
+    ba_2_2 == 1 ~ "wrong", 
+    ba_2_3 == 1 ~ "correct", 
+    ba_2_4 == 1 ~ "correct", 
+    ba_2_5 == 1 ~ "wrong",
+    TRUE ~ "wrong"
+  ),
+  be_pack = case_when(
+    is.na(be_2_1) & is.na(be_2_2) & is.na(be_2_3) & is.na(be_2_4) ~ NA_character_,
+    be_2_1 == 1 ~ "wrong", 
+    be_2_2 == 1 ~ "correct", 
+    be_2_3 == 1 ~ "wrong", 
+    be_2_4 == 1 ~ "wrong", 
+    TRUE ~ "wrong"
+  ),
+  he_pack = case_when(
+    is.na(he_2_1) & is.na(he_2_2) & is.na(he_2_3) & is.na(he_2_4) & is.na(he_2_5) & is.na(he_2_6) ~ NA_character_,
+    he_2_1 == 1 ~ "wrong", 
+    he_2_2 == 1 ~ "correct", 
+    he_2_3 == 1 ~ "correct", 
+    he_2_4 == 1 ~ "correct", 
+    he_2_5 == 1 ~ "correct",
+    he_2_6 == 1 ~ "wrong",
+    TRUE ~ "wrong"
+  )
+)
+
+df <- df %>%
+  mutate(across(99:104, ~ factor(., levels = c("wrong", "correct")))) # 1 = wrong; 2 = correct
 ```
 
 ## Sample
+People were recruited who:
+
+* currently live in Austria
+* are the primary grocery shopper
+
+Most respondents live in a 2-person household, no children.
+```{r}
+#| echo: false
+#| label: sample-descriptives
+
+df$gender <- factor(df$gender, levels = c(1,2,3), labels = c("Male", "Female", "Other"))
+df$children <- as.numeric(df$children)
+
+table1(~ gender + age + adults + children, data = df)
+```
 
 ## Purchase frequency
+This scale assesses how frequently people buy each of the foods. 1 - never, 2 - less than once a month, 3 - about once a month, 4 - 2-3 times a month, 5 - once a week, 6 - Multiple times a week. 
+
+Products should be bought quite frequently as that was a criteria for the initial selection. 
+
 ```{r}
 #| label: frequency-descriptives
 #| echo: false
@@ -75,6 +221,7 @@ ggplot(food_freq_summary, aes(x = reorder(food, mean), y = mean, fill = food)) +
   geom_errorbar(aes(ymin = mean - sd, ymax = mean + sd), width = 0.2) +
   labs(x = "Food type", y = "Mean Frequency", title = "Average Food Frequency with Variability") +
   theme_minimal() +
+  scale_fill_brewer(palette = "Set3") +
   theme(legend.position = "none") +
   coord_flip()
 
@@ -91,68 +238,167 @@ food_data$Food <- food_labels[food_data$Food]
 ggplot(food_data, aes(x = Food, fill = Frequency)) +
   geom_bar(position = "fill") +  # Proportional stacked bars
   scale_y_continuous(labels = scales::percent) +  # Show percentages on y-axis
+  scale_fill_brewer(palette = "Set3") +
   labs(x = "Food", y = "Proportion", fill = "Frequency",
        title = "Proportional Distribution of Consumption Frequency for Each Food Item") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
-## Storage per product
 
+## Correct storage per food item
+Below shows whether products were stored in the correct location. This means whether it is in the fridge, in the freezer, on the kitchen counter, in a cupboard or cellar. Criteria are based on information from the BMK (Bundesministerium für Klimaschutz, Umwelt, Energie, Mobilität, Innovation und Technologie) and The Netherlands Nutrition Centre (https://www.voedingscentrum.nl/nl/thema/kopen-koken-bewaren/eten-bewaren.aspx).
+
+Cucumbers and bell peppers are often stored sub-optimally. They are stored in the fridge but it is best not to store them in the fridge. (https://www.bmk.gv.at/themen/klima_umwelt/abfall/abfallvermeidung/lebensmittel/tipps/lagerung/obst_gemuese.html)
+
+According to The Netherlands Nutrition Centre, courgette loses flavour in the fridge and is best stored outside it. Though BMK advises the fridge.
+
+Most other foods are stored correctly. 
 ```{r}
+#| label: correct-food
 #| echo: false
-#| label: storage locations
 
-plot_storage <- function(df, food_code, food_name, food_freq_col) {
-  # Generate the corresponding food storage column dynamically (e.g., br_1, pot_1)
+loc_summary <- df %>%
+  select(88:98) %>%
+  pivot_longer(cols = everything(), names_to = "Question", values_to = "Response") %>%
+  filter(!is.na(Response)) %>%
+  group_by(Question, Response) %>%
+  summarise(Count = n(), .groups = "drop") %>%
+  left_join(
+    df %>%
+      select(88:98) %>%
+      pivot_longer(cols = everything(), names_to = "Question", values_to = "Response") %>%
+      filter(!is.na(Response)) %>%
+      group_by(Question) %>%
+      summarise(Total = n(), .groups = "drop"),
+    by = "Question"
+  ) %>%
+  mutate(Percent = (Count / Total) * 100)
+
+# Map food codes to food names
+loc_summary <- loc_summary %>%
+  mutate(
+    Product = recode(Question,
+                     `br_loc` = "bread",
+                     `pot_loc` = "potato",
+                     `let_loc` = "lettuce",
+                     `cu_loc` = "cucumber",
+                     `ba_loc` = "banana",
+                     `ap_loc` = "apple",
+                     `be_loc` = "berries",
+                     `he_loc` = "herbs",
+                     `co_loc` = "bell pepper",
+                     `pep_loc` = "courgette",
+                     `bro_loc` = "broccoli"
+    )
+  )
+
+# Plot
+ggplot(loc_summary, aes(x = Product, y = Percent, fill = Response)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = c("wrong" = "#FB8072FF", "correct" = "#B3DE69FF")) +
+  coord_flip() +
+  labs(
+    title = "Percentage of Correct storage location",
+    x = "Food product",
+    y = "Percentage"
+  ) +
+  theme_minimal()
+```
+
+
+## Storage per product
+This further breaks down where each product is stored.
+```{r}
+#| label: compact-storage-loc
+#| echo: false 
+
+# Define location labels
+loc_labels <- c("Refrigerator", "Freezer", "Pantry/Cupboard", "Counter", "Cellar", "Other")
+
+# Create a function to process data for regular food items
+process_food_data <- function(df, food_code, food_name, food_freq_col) {
+  # Generate the corresponding food storage column dynamically
   food_col <- paste0(food_code, "_1")
   
-  # Filter the data: Only include rows where the corresponding food_freq column is not 1
+  # Filter and prepare the data
   food_summary <- df %>%
-    filter(!is.na(!!sym(food_col)) & !!sym(food_freq_col) != 1) %>%  # Filter out rows where food_freq is 1
+    filter(!is.na(!!sym(food_col)) & !!sym(food_freq_col) != 1) %>%
     count(!!sym(food_col)) %>%
-    mutate(StorageOption = factor(!!sym(food_col), levels = 1:6, labels = loc_labels)) %>%
-    select(StorageOption, n)
+    mutate(
+      StorageOption = factor(!!sym(food_col), levels = 1:6, labels = loc_labels),
+      Food = food_name,
+      Proportion = (n / sum(n)) * 100
+    ) %>%
+    select(Food, StorageOption, Proportion)
   
-  # Plot the bar plot
-  ggplot(food_summary, aes(x = StorageOption, y = n, fill = StorageOption)) + 
-    geom_bar(stat = "identity") +
-    labs(title = paste("Storage Locations for", food_name), x = "Storage Option", y = "Frequency") +
-    theme_minimal() +
-    theme(legend.position = "none")
+  return(food_summary)
 }
 
-# Define the list of food items with their corresponding food_freq column
-food_list <- list(
-  #list(food_code = "br", food_name = "bread", food_freq_col = "food_freq_1"),
-  list(food_code = "pot", food_name = "potato", food_freq_col = "food_freq_2"),
-  list(food_code = "let", food_name = "lettuce", food_freq_col = "food_freq_3"),
-  list(food_code = "cu", food_name = "cucumber", food_freq_col = "food_freq_4"),
-  list(food_code = "ba", food_name = "banana", food_freq_col = "food_freq_5"),
-  list(food_code = "ap", food_name = "apple", food_freq_col = "food_freq_6"),
-  list(food_code = "be", food_name = "berries", food_freq_col = "food_freq_7"),
-  list(food_code = "he", food_name = "herbs", food_freq_col = "food_freq_8"),
-  list(food_code = "co", food_name = "bell pepper", food_freq_col = "food_freq_9"),
-  list(food_code = "pep", food_name = "courgette", food_freq_col = "food_freq_10"),
-  list(food_code = "bro", food_name = "broccoli", food_freq_col = "food_freq_11")
-)
-bread_long <- df %>%
+# Process bread data (special case with multiple columns)
+bread_summary <- df %>%
   select(starts_with("br_1_") & !ends_with("TEXT")) %>% 
   pivot_longer(cols = everything(), names_to = "StorageOption", values_to = "Selected") %>%
   group_by(StorageOption) %>%
-  summarise(Count = sum(Selected, na.rm = T)) %>%
-  mutate(Proportion = (Count / sum(Count, na.rm = T))*100,  # Proportions of each storage option
-         StorageOption = factor(StorageOption, levels = paste0("br_1_", 1:6), labels = loc_labels))
+  summarise(Count = sum(Selected, na.rm = TRUE)) %>%
+  filter(Count > 0) %>%
+  mutate(
+    Proportion = (Count / sum(Count)) * 100,
+    StorageOption = factor(StorageOption, 
+                           levels = paste0("br_1_", 1:6), 
+                           labels = loc_labels),
+    Food = "Bread"
+  ) %>%
+  select(Food, StorageOption, Proportion)
 
-ggplot(bread_long, aes(x = StorageOption, y = Proportion, fill = StorageOption)) + 
+# Define the list of food items with their corresponding food_freq column
+food_list <- list(
+  list(food_code = "pot", food_name = "Potato", food_freq_col = "food_freq_2"),
+  list(food_code = "let", food_name = "Lettuce", food_freq_col = "food_freq_3"),
+  list(food_code = "cu", food_name = "Cucumber", food_freq_col = "food_freq_4"),
+  list(food_code = "ba", food_name = "Banana", food_freq_col = "food_freq_5"),
+  list(food_code = "ap", food_name = "Apple", food_freq_col = "food_freq_6"),
+  list(food_code = "be", food_name = "Berries", food_freq_col = "food_freq_7"),
+  list(food_code = "he", food_name = "Herbs", food_freq_col = "food_freq_8"),
+  list(food_code = "co", food_name = "Bell Pepper", food_freq_col = "food_freq_9"),
+  list(food_code = "pep", food_name = "Courgette", food_freq_col = "food_freq_10"),
+  list(food_code = "bro", food_name = "Broccoli", food_freq_col = "food_freq_11")
+)
+
+# Process all regular food items
+all_food_data <- map_dfr(food_list, ~process_food_data(df, .$food_code, .$food_name, .$food_freq_col))
+
+# Combine bread data with other food data
+combined_data <- bind_rows(bread_summary, all_food_data)
+
+# Convert Food to a factor with specific order to control the order in the plot
+combined_data$Food <- factor(combined_data$Food, 
+                             levels = c("Bread", "Potato", "Lettuce", "Cucumber", "Banana", 
+                                        "Apple", "Berries", "Herbs", "Bell Pepper", "Courgette", "Broccoli"))
+
+ggplot(combined_data, aes(x = StorageOption, y = Proportion, fill = StorageOption)) +
   geom_bar(stat = "identity") +
-  labs(title = "Storage Locations for Bread", fill = "Storage Option") +
-  theme_minimal() + 
-  theme(legend.position = "none")
-# Apply the function to each food type in the list
-lapply(food_list, function(x) plot_storage(df, x$food_code, x$food_name, x$food_freq_col))
+  facet_wrap(~ Food, ncol = 4) +
+  labs(title = "Storage Locations by Food Type", 
+       x = "Storage Location", 
+       y = "Percentage") +
+  scale_fill_brewer(palette = "Set3") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "none",
+    strip.background = element_rect(fill = "lightgray"),
+    strip.text = element_text(face = "bold")
+  ) +
+  coord_flip()
 ```
 
 ## Foods going off
+This figure shows mean scores for the question how often a food goes bad before being able to finish it, rated on a 7-point scale from 1 - Never to 7 - (almost) always.
+
+Overall, people indicate that their food very rarely goes bad before use, with the overall mean falling somewhere between almost never and rarely.
+
+Especially of interest are the products which are stored suboptimally: cucumber and bell peppers. However, these are among the products which go off the least frequently.
+
 ```{r}
 #| label: food expiry
 #| echo: false
@@ -179,13 +425,145 @@ mean_sd_data <- data_for_plot %>%
 
 # Plot the means with error bars
 ggplot(mean_sd_data, aes(x = FoodType, y = Mean)) +
-  geom_bar(stat = "identity", fill = "skyblue", color = "black") +
+  geom_bar(stat = "identity", fill = "#8DD3C7FF") +
   geom_errorbar(aes(ymin = Mean - SE, ymax = Mean + SE), width = 0.2) +
   theme_minimal() +
   labs(title = "Mean frequency of food going bad",
        x = "Food Types",
        y = "Mean Rating (1-7)") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_fill_brewer(palette = "Set3") +
+  scale_y_continuous(breaks = seq(1,7,by=1), limits = c(0,7)) +
+  coord_flip()
 ```
 
+## Correct packaging per food item
+This shows whether food products were packaged correctly when stored. Below is more detailed information about how the products are stored.
 
+This is not a great representation of the data as it is less wrong/correct and more perfect/good, as for many products it isn't that clearly bad.
+```{r}
+#| echo: false
+#| label: correct packaging
+
+pack_summary <- df %>%
+  select(99:104) %>%
+  pivot_longer(cols = everything(), names_to = "Question", values_to = "Response") %>%
+  filter(!is.na(Response)) %>%
+  group_by(Question, Response) %>%
+  summarise(Count = n(), .groups = "drop") %>%
+  left_join(
+    df %>%
+      select(99:104) %>%
+      pivot_longer(cols = everything(), names_to = "Question", values_to = "Response") %>%
+      filter(!is.na(Response)) %>%
+      group_by(Question) %>%
+      summarise(Total = n(), .groups = "drop"),
+    by = "Question"
+  ) %>%
+  mutate(Percent = (Count / Total) * 100)
+
+# Map food codes to food names
+pack_summary <- pack_summary %>%
+  mutate(
+    Product = recode(Question,
+                     `br_pack` = "bread",
+                     `bro_pack` = "broccoli",
+                     `let_pack` = "lettuce",
+                     `ba_pack` = "banana",
+                     `be_pack` = "berries",
+                     `he_pack` = "herbs",
+    )
+  )
+
+# Plot
+ggplot(pack_summary, aes(x = Product, y = Percent, fill = Response)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = c("wrong" = "#FB8072FF", "correct" = "#B3DE69FF")) +
+  coord_flip() +
+  labs(
+    title = "Percentage of Correct packaging",
+    x = "Food product",
+    y = "Percentage"
+  ) +
+  theme_minimal()
+```
+
+## Storage specifics per food
+maybe most interesting stuff:
+
+* bread often stored airtight but it is best to allow some airflow, as airtight packaging may trap moisture and mould the bread. Though it's also not a very big deal.
+* lettuce: very few people use the 'stalk in water' technique for storing their lettuce, which could be prolong the shelf life. 
+* anana: no one wraps the top in foil to stop the produced ethylene from spreading, which may affect the bananas themselves and surrounding products
+* berries: they are somewhat more often thrown away and also packaged suboptimally. Airtight packaging and washing should be avoided. The moisture will make them go mouldy quicker.
+* herbs: packaging varies a lot, the best being in a glass of water of wrapped in a moist towel. Though herbs are not bought very often.
+```{r}
+#| label: storage-how
+#| echo: false
+
+br_responses <- sum(df$food_freq_1 != 1, na.rm = TRUE)
+bro_responses <- sum(df$food_freq_11 != 1, na.rm = TRUE)
+let_responses <- sum(df$food_freq_3 != 1, na.rm = TRUE)
+ba_responses <- sum(df$food_freq_5 != 1, na.rm = TRUE)
+be_responses <- sum(df$food_freq_7 != 1, na.rm = TRUE)
+he_responses <- sum(df$food_freq_8 != 1, na.rm = TRUE)
+
+# Define a helper function to calculate frequencies and create plots
+create_storage_plot <- function(data, responses, storage_methods, column_prefix) {
+  storage_data <- df %>%
+    select(starts_with(column_prefix)) %>%
+    select(-ends_with("TEXT"))
+  
+  # Calculate the frequency of each option (counting the number of valid responses for each column)
+  storage_frequencies <- sapply(storage_data, function(x) sum(!is.na(x)))
+  
+  # Create a data frame for plotting with proper labels
+  plot_data <- data.frame(
+    storage_method = storage_methods,
+    frequency = storage_frequencies,
+    percentage = (storage_frequencies / responses) * 100
+  )
+  
+  # Create a bar plot
+  ggplot(plot_data, aes(x = storage_method, y = percentage)) +
+    geom_bar(stat = "identity", fill = "#8DD3C7FF") +
+    geom_text(aes(label = paste0(round(percentage, 1), "%")), 
+              position = position_stack(vjust = 0.5), 
+              vjust = -0.5, 
+              color = "black") +
+    labs(
+      title = paste(column_prefix, "Storage Methods"),
+      subtitle = paste("Base: Respondents who answered food_freq_1 ≠ 1,", "n =", responses),
+      x = "Storage Method",
+      y = "Percentage",
+    ) +
+    theme_minimal() +
+    theme(
+      axis.text.x = element_text(angle = 45, hjust = 1),
+      plot.title = element_text(face = "bold")
+    ) +
+    ylim(0,100)
+  
+  
+}
+
+# Define storage methods for each food type
+br_storage_methods <- c("Loose", "Airtight packaging", "Allowing airflow", "Other")
+bro_storage_methods <- c("Loose", "Airtight packaging", "Allowing airflow", "Other")
+let_storage_methods <- c("Loose", "Airtight packaging", "Allowing airflow", "Stalk in water", "Other")
+ba_storage_methods <- c("Loose", "Airtight packaging", "Allowing airflow", "Top wrapped up", "Other")
+be_storage_methods <- c("Airtight packaging", "Allowing airflow", "Washed", "Other")
+he_storage_methods <- c("Loose", "Airtight packaging", "Allowing airflow", "In a glass of water", "Wrapped in moist towel", "Other")
+
+# Generate plots for each food item
+br_plot <- create_storage_plot(df, br_responses, br_storage_methods, "br_2") + ggtitle("bread storage")
+bro_plot <- create_storage_plot(df, bro_responses, bro_storage_methods, "bro_2") + ggtitle("broccoli storage")
+let_plot <- create_storage_plot(df, let_responses, let_storage_methods, "let_2") + ggtitle("lettuce storage")
+ba_plot <- create_storage_plot(df, ba_responses, ba_storage_methods, "ba_2") + ggtitle("banana storage")
+be_plot <- create_storage_plot(df, be_responses, be_storage_methods, "be_2") + ggtitle("berries storage")
+he_plot <- create_storage_plot(df, he_responses, he_storage_methods, "he_2") + ggtitle("herbs storage")
+
+# Print the combined plot
+br_plot + bro_plot
+let_plot + ba_plot
+be_plot + he_plot
+```
