@@ -1,0 +1,19 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - pilot-script.qmd
+
+website:
+  title: "Pilot survey"
+  navbar:
+    left:
+      - pilot-script.qmd
+    tools:
+      - icon: github
+        href: https://github.com/CasHsmn/R_comb_habit
+    
+format:
+  html:
+    theme: cosmo
+    toc: true
