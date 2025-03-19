@@ -286,8 +286,8 @@ loc_summary <- loc_summary %>%
                      `ap_loc` = "apple",
                      `be_loc` = "berries",
                      `he_loc` = "herbs",
-                     `co_loc` = "bell pepper",
-                     `pep_loc` = "courgette",
+                     `co_loc` = "courgette",
+                     `pep_loc` = "bell pepper",
                      `bro_loc` = "broccoli"
     )
   )
