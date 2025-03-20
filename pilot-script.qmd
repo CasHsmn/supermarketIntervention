@@ -227,23 +227,23 @@ ggplot(food_freq_summary, aes(x = reorder(food, mean), y = mean, fill = food)) +
   coord_flip()
 
 # Proportional bar plot
-food_data <- df %>%
-  select(1:11) %>%
-  pivot_longer(cols = everything(), names_to = "Food", values_to = "Frequency") %>%
-  mutate(Frequency = factor(Frequency, levels = 1:6, labels = frequency_levels))
-
-
-# Apply labels
-food_data$Food <- food_labels[food_data$Food]
-
-ggplot(food_data, aes(x = Food, fill = Frequency)) +
-  geom_bar(position = "fill") +  # Proportional stacked bars
-  scale_y_continuous(labels = scales::percent) +  # Show percentages on y-axis
-  scale_fill_brewer(palette = "Set3") +
-  labs(x = "Food", y = "Proportion", fill = "Frequency",
-       title = "Proportional Distribution of Consumption Frequency for Each Food Item") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+# food_data <- df %>%
+#   select(1:11) %>%
+#   pivot_longer(cols = everything(), names_to = "Food", values_to = "Frequency") %>%
+#   mutate(Frequency = factor(Frequency, levels = 1:6, labels = frequency_levels))
+# 
+# 
+# # Apply labels
+# food_data$Food <- food_labels[food_data$Food]
+# 
+# ggplot(food_data, aes(x = Food, fill = Frequency)) +
+#   geom_bar(position = "fill") +  # Proportional stacked bars
+#   scale_y_continuous(labels = scales::percent) +  # Show percentages on y-axis
+#   scale_fill_brewer(palette = "Set3") +
+#   labs(x = "Food", y = "Proportion", fill = "Frequency",
+#        title = "Proportional Distribution of Consumption Frequency for Each Food Item") +
+#   theme_minimal() +
+#   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ## Correct storage per food item
@@ -255,7 +255,7 @@ Below shows whether products were stored in the correct location. We distinguish
 * Pantry or kitchen cupboard
 * Cellar
 
-Criteria are based on information from the [BMK](Bundesministerium für Klimaschutz, Umwelt, Energie, Mobilität, Innovation und Technologie) and The [Netherlands Nutrition Centre](https://www.voedingscentrum.nl/nl/thema/kopen-koken-bewaren/eten-bewaren.aspx).
+Criteria are based on information from the Austrian [BMK](https://www.bmk.gv.at/themen/klima_umwelt/abfall/abfallvermeidung/lebensmittel/tipps/lagerung/obst_gemuese.html), [Gesundheit.gv.at](https://www.gesundheit.gv.at/leben/ernaehrung/lebensmittel/lagerung-von-lebensmitteln.html) and The [Netherlands Nutrition Centre](https://www.voedingscentrum.nl/nl/thema/kopen-koken-bewaren/eten-bewaren.aspx).
 
 * Cucumbers are often stored in the fridge. However, they are sensitive to cold and will only last up to 5 days in the fridge. They are best stored at 10-13 degrees, where they will last up to 3 weeks, but a cold place in the kitchen is still preferable over the fridge.
 * Apples are often stored on the kitchen counter. However, they are best kept between 2-7 degrees, in the fridge. This also makes it more likely they stay away from other fruits and vegetables which are sensitive to ethylene.
