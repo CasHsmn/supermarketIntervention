@@ -18,6 +18,7 @@ library(tidyr)
 library(purrr)
 library(patchwork)
 library(table1)
+library(kableExtra)
 
 # import data
 wd <- list()
@@ -92,8 +93,8 @@ df <- df %>% mutate(
   ),
   ap_loc = case_when(
     is.na(ap_1) ~ NA_character_,
-    ap_1 %in% c(1, 2) ~ "correct",
-    TRUE ~ "okay"
+    ap_1 %in% c(1,2,5) ~ "correct",
+    TRUE ~ "wrong"
   ),
   be_loc = case_when(
     is.na(be_1) ~ NA_character_,
@@ -107,7 +108,7 @@ df <- df %>% mutate(
   ),
   pep_loc = case_when(
     is.na(pep_1) ~ NA_character_,
-    pep_1 %in% c(2, 3, 4, 5) ~ "correct",
+    pep_1 %in% c(1,5) ~ "correct",
     TRUE ~ "wrong"
   ),
   co_loc = case_when(
@@ -123,60 +124,60 @@ df <- df %>%
 df <- df %>% mutate(
   br_pack = case_when(
     is.na(br_2_1) & is.na(br_2_2) & is.na(br_2_3) & is.na(br_2_4) ~ NA_character_,
-    br_2_1 == 1 ~ "wrong", 
-    br_2_2 == 1 ~ "wrong", 
-    br_2_3 == 1 ~ "correct", 
-    br_2_4 == 1 ~ "wrong", 
-    TRUE ~ "wrong"
+    br_2_1 == 1 ~ "poor", 
+    br_2_2 == 1 ~ "poor", 
+    br_2_3 == 1 ~ "best", 
+    br_2_4 == 1 ~ "adequate", 
+    TRUE ~ "poor"
   ),
   bro_pack = case_when(
     is.na(bro_2_1) & is.na(bro_2_2) & is.na(bro_2_3) & is.na(bro_2_4) ~ NA_character_,
-    br_2_1 == 1 ~ "wrong", 
-    br_2_2 == 1 ~ "wrong", 
-    br_2_3 == 1 ~ "correct", 
-    br_2_4 == 1 ~ "wrong", 
-    TRUE ~ "wrong"
+    br_2_1 == 1 ~ "adequate", 
+    br_2_2 == 1 ~ "adequate", 
+    br_2_3 == 1 ~ "best", 
+    br_2_4 == 1 ~ "adequate", 
+    TRUE ~ "poor"
   ),
   let_pack = case_when(
     is.na(let_2_1) & is.na(let_2_2) & is.na(let_2_3) & is.na(let_2_4) & is.na(let_2_5) ~ NA_character_,
-    let_2_1 == 1 ~ "wrong", 
-    let_2_2 == 1 ~ "wrong", 
-    let_2_3 == 1 ~ "correct", 
-    let_2_4 == 1 ~ "correct", 
-    let_2_5 == 1 ~ "wrong",
-    TRUE ~ "wrong"
+    let_2_1 == 1 ~ "adequate", 
+    let_2_2 == 1 ~ "poor", 
+    let_2_3 == 1 ~ "adequate", 
+    let_2_4 == 1 ~ "best", 
+    let_2_5 == 1 ~ "adequate",
+    TRUE ~ "poor"
   ),
   ba_pack = case_when(
     is.na(ba_2_1) & is.na(ba_2_2) & is.na(ba_2_3) & is.na(ba_2_4) & is.na(ba_2_5) ~ NA_character_,
-    ba_2_1 == 1 ~ "correct", 
-    ba_2_2 == 1 ~ "wrong", 
-    ba_2_3 == 1 ~ "correct", 
-    ba_2_4 == 1 ~ "correct", 
-    ba_2_5 == 1 ~ "wrong",
-    TRUE ~ "wrong"
+    ba_2_1 == 1 ~ "adequate", 
+    ba_2_2 == 1 ~ "poor", 
+    ba_2_3 == 1 ~ "adequate", 
+    ba_2_4 == 1 ~ "best", 
+    ba_2_5 == 1 ~ "adequate",
+    TRUE ~ "poor"
   ),
   be_pack = case_when(
     is.na(be_2_1) & is.na(be_2_2) & is.na(be_2_3) & is.na(be_2_4) ~ NA_character_,
-    be_2_1 == 1 ~ "wrong", 
-    be_2_2 == 1 ~ "correct", 
-    be_2_3 == 1 ~ "wrong", 
-    be_2_4 == 1 ~ "wrong", 
-    TRUE ~ "wrong"
+    be_2_1 == 1 ~ "adequate", 
+    be_2_2 == 1 ~ "best", 
+    be_2_3 == 1 ~ "poor", 
+    be_2_4 == 1 ~ "adequate", 
+    TRUE ~ "poor"
   ),
   he_pack = case_when(
     is.na(he_2_1) & is.na(he_2_2) & is.na(he_2_3) & is.na(he_2_4) & is.na(he_2_5) & is.na(he_2_6) ~ NA_character_,
-    he_2_1 == 1 ~ "wrong", 
-    he_2_2 == 1 ~ "correct", 
-    he_2_3 == 1 ~ "correct", 
-    he_2_4 == 1 ~ "correct", 
-    he_2_5 == 1 ~ "correct",
-    he_2_6 == 1 ~ "wrong",
-    TRUE ~ "wrong"
+    he_2_1 == 1 ~ "poor", 
+    he_2_2 == 1 ~ "adequate", 
+    he_2_3 == 1 ~ "adequate", 
+    he_2_4 == 1 ~ "best", 
+    he_2_5 == 1 ~ "best",
+    he_2_6 == 1 ~ "adequate",
+    TRUE ~ "poor"
   )
 )
 
 df <- df %>%
-  mutate(across(99:104, ~ factor(., levels = c("wrong", "correct")))) # 1 = wrong; 2 = correct
+  mutate(across(99:104, ~ factor(., levels = c("poor", "adequate", "best")))) # 1 = wrong; 2 = correct
 ```
 
 ## Sample
@@ -246,13 +247,23 @@ ggplot(food_data, aes(x = Food, fill = Frequency)) +
 ```
 
 ## Correct storage per food item
-Below shows whether products were stored in the correct location. This means whether it is in the fridge, in the freezer, on the kitchen counter, in a cupboard or cellar. Criteria are based on information from the BMK (Bundesministerium für Klimaschutz, Umwelt, Energie, Mobilität, Innovation und Technologie) and The Netherlands Nutrition Centre (https://www.voedingscentrum.nl/nl/thema/kopen-koken-bewaren/eten-bewaren.aspx).
+Below shows whether products were stored in the correct location. We distinguish five possible location:
 
-Cucumbers and bell peppers are often stored sub-optimally. They are stored in the fridge but it is best not to store them in the fridge. (https://www.bmk.gv.at/themen/klima_umwelt/abfall/abfallvermeidung/lebensmittel/tipps/lagerung/obst_gemuese.html)
+* Fridge
+* Freezer
+* Kitchen counter
+* Pantry or kitchen cupboard
+* Cellar
 
-According to The Netherlands Nutrition Centre, courgette loses flavour in the fridge and is best stored outside it. Though BMK advises the fridge.
+Criteria are based on information from the [BMK](Bundesministerium für Klimaschutz, Umwelt, Energie, Mobilität, Innovation und Technologie) and The [Netherlands Nutrition Centre](https://www.voedingscentrum.nl/nl/thema/kopen-koken-bewaren/eten-bewaren.aspx).
 
-Most other foods are stored correctly. 
+* Cucumbers are often stored in the fridge. However, they are sensitive to cold and will only last up to 5 days in the fridge. They are best stored at 10-13 degrees, where they will last up to 3 weeks, but a cold place in the kitchen is still preferable over the fridge.
+* Apples are often stored on the kitchen counter. However, they are best kept between 2-7 degrees, in the fridge. This also makes it more likely they stay away from other fruits and vegetables which are sensitive to ethylene.
+
+Tomatoes are missing from the list, but may also be tricky. They are best stored outside of the fridge.
+
+Most other foods are stored correctly and less important to focus an intervention on. Though it may still be worthwhile to inform consumers that bread freezer well, potatoes should go somewhere cool, dry and dark and bananas should not go in the fridge.
+
 ```{r}
 #| label: correct-food
 #| echo: false
@@ -299,6 +310,7 @@ ggplot(loc_summary, aes(x = Product, y = Percent, fill = Response)) +
   coord_flip() +
   labs(
     title = "Percentage of Correct storage location",
+    subtitle = "i.e. \"Where do you usually store a whole head of lettuce?\"",
     x = "Food product",
     y = "Percentage"
   ) +
@@ -393,11 +405,11 @@ ggplot(combined_data, aes(x = StorageOption, y = Proportion, fill = StorageOptio
 ```
 
 ## Foods going off
-This figure shows mean scores for the question how often a food goes bad before being able to finish it, rated on a 7-point scale from 1 - Never to 7 - (almost) always.
+This figure shows mean scores for the question *how often does a food goes bad before being able to finish it*, rated on a 7-point scale from 1 - Never to 7 - (almost) always.
 
-Overall, people indicate that their food very rarely goes bad before use, with the overall mean falling somewhere between almost never and rarely.
+People generally underestimate how much food they throw away, so this has to be taken with a grain of salt, but gives an indication.
 
-Especially of interest are the products which are stored suboptimally: cucumber and bell peppers. However, these are among the products which go off the least frequently.
+Overall, people indicate that their food very rarely goes bad before use, with the overall mean falling somewhere between almost never and rarely. Regardless, people do let food go off more often than it should happen.
 
 ```{r}
 #| label: food expiry
@@ -425,22 +437,42 @@ mean_sd_data <- data_for_plot %>%
 
 # Plot the means with error bars
 ggplot(mean_sd_data, aes(x = FoodType, y = Mean)) +
-  geom_bar(stat = "identity", fill = "#8DD3C7FF") +
+  geom_bar(stat = "identity", fill = "#8DD3C7FF", alpha = .7) +
   geom_errorbar(aes(ymin = Mean - SE, ymax = Mean + SE), width = 0.2) +
   theme_minimal() +
   labs(title = "Mean frequency of food going bad",
+       subtitle = "i.e. \"How often does bread you bought go bad before you finish it?\"",
        x = "Food Types",
-       y = "Mean Rating (1-7)") +
+       y = "Mean Rating (1 (never) - 7 (always))") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   scale_fill_brewer(palette = "Set3") +
-  scale_y_continuous(breaks = seq(1,7,by=1), limits = c(0,7)) +
+  scale_y_continuous(breaks = seq(1,7,by=1), limits = c(1,7), , oob = scales::squish) +
   coord_flip()
+
+rating_table <- data_for_plot %>%
+  count(Rating) %>%
+  mutate(Rating = factor(Rating, 
+                         levels = 1:7, 
+                         labels = c("Never", "Almost Never", "Rarely", "Sometimes", 
+                                    "Fairly Often", "Very Often", "Always"))) %>% 
+  drop_na()
+
+# Print the table
+kable(rating_table, col.names = c("Rating", "Frequency"), caption = "Overall frequency of each rating")
 ```
 
 ## Correct packaging per food item
-This shows whether food products were packaged correctly when stored. Below is more detailed information about how the products are stored.
+This shows whether food products were packaged correctly when stored. Below is more detailed information about how the products are stored. This question was only asked for foods where packaging matters.
 
-This is not a great representation of the data as it is less wrong/correct and more perfect/good, as for many products it isn't that clearly bad.
+It is split into best/adequate/poor, because in many cases there is an optimal storage condition, but alternatives are also not that bad.
+
+Of note are:
+
+* Bread is often stored airtight, but this traps moisture and will lead to it moulding quicker.
+* A head of lettuce is best stored with the stalk in water, though this is very rarely done 
+* fresh herbs are best wrapped in a moist kitchen towel or placed in a glass of water, but many do not
+* Bananas are best stored with the top wrapped to stop ethylene from spreading, but no one indicated doing this.
+
 ```{r}
 #| echo: false
 #| label: correct packaging
@@ -478,10 +510,11 @@ pack_summary <- pack_summary %>%
 # Plot
 ggplot(pack_summary, aes(x = Product, y = Percent, fill = Response)) +
   geom_bar(stat = "identity") +
-  scale_fill_manual(values = c("wrong" = "#FB8072FF", "correct" = "#B3DE69FF")) +
+  scale_fill_manual(values = c("poor" = "#FB8072FF", "adequate" = "#FFFFB3FF", "best" = "#B3DE69FF")) +
   coord_flip() +
   labs(
     title = "Percentage of Correct packaging",
+    subtitle = "i.e. \"How do you usually store bananas? Please select all that apply\"",
     x = "Food product",
     y = "Percentage"
   ) +
@@ -489,13 +522,7 @@ ggplot(pack_summary, aes(x = Product, y = Percent, fill = Response)) +
 ```
 
 ## Storage specifics per food
-maybe most interesting stuff:
-
-* bread often stored airtight but it is best to allow some airflow, as airtight packaging may trap moisture and mould the bread. Though it's also not a very big deal.
-* lettuce: very few people use the 'stalk in water' technique for storing their lettuce, which could be prolong the shelf life. 
-* anana: no one wraps the top in foil to stop the produced ethylene from spreading, which may affect the bananas themselves and surrounding products
-* berries: they are somewhat more often thrown away and also packaged suboptimally. Airtight packaging and washing should be avoided. The moisture will make them go mouldy quicker.
-* herbs: packaging varies a lot, the best being in a glass of water of wrapped in a moist towel. Though herbs are not bought very often.
+This breaks down further how some of the products are stored.
 ```{r}
 #| label: storage-how
 #| echo: false

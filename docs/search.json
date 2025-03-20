@@ -25,7 +25,7 @@
     "href": "pilot-script.html#correct-storage-per-food-item",
     "title": "pilot-analysis",
     "section": "Correct storage per food item",
-    "text": "Correct storage per food item\nBelow shows whether products were stored in the correct location. This means whether it is in the fridge, in the freezer, on the kitchen counter, in a cupboard or cellar. Criteria are based on information from the BMK (Bundesministerium für Klimaschutz, Umwelt, Energie, Mobilität, Innovation und Technologie) and The Netherlands Nutrition Centre (https://www.voedingscentrum.nl/nl/thema/kopen-koken-bewaren/eten-bewaren.aspx).\nCucumbers and bell peppers are often stored sub-optimally. They are stored in the fridge but it is best not to store them in the fridge. (https://www.bmk.gv.at/themen/klima_umwelt/abfall/abfallvermeidung/lebensmittel/tipps/lagerung/obst_gemuese.html)\nAccording to The Netherlands Nutrition Centre, courgette loses flavour in the fridge and is best stored outside it. Though BMK advises the fridge.\nMost other foods are stored correctly."
+    "text": "Correct storage per food item\nBelow shows whether products were stored in the correct location. We distinguish five possible location:\n\nFridge\nFreezer\nKitchen counter\nPantry or kitchen cupboard\nCellar\n\nCriteria are based on information from the BMK and The Netherlands Nutrition Centre.\n\nCucumbers are often stored in the fridge. However, they are sensitive to cold and will only last up to 5 days in the fridge. They are best stored at 10-13 degrees, where they will last up to 3 weeks, but a cold place in the kitchen is still preferable over the fridge.\nApples are often stored on the kitchen counter. However, they are best kept between 2-7 degrees, in the fridge. This also makes it more likely they stay away from other fruits and vegetables which are sensitive to ethylene.\n\nTomatoes are missing from the list, but may also be tricky. They are best stored outside of the fridge.\nMost other foods are stored correctly and less important to focus an intervention on. Though it may still be worthwhile to inform consumers that bread freezer well, potatoes should go somewhere cool, dry and dark and bananas should not go in the fridge."
   },
   {
     "objectID": "pilot-script.html#storage-per-product",
@@ -39,20 +39,20 @@
     "href": "pilot-script.html#foods-going-off",
     "title": "pilot-analysis",
     "section": "Foods going off",
-    "text": "Foods going off\nThis figure shows mean scores for the question how often a food goes bad before being able to finish it, rated on a 7-point scale from 1 - Never to 7 - (almost) always.\nOverall, people indicate that their food very rarely goes bad before use, with the overall mean falling somewhere between almost never and rarely.\nEspecially of interest are the products which are stored suboptimally: cucumber and bell peppers. However, these are among the products which go off the least frequently."
+    "text": "Foods going off\nThis figure shows mean scores for the question how often does a food goes bad before being able to finish it, rated on a 7-point scale from 1 - Never to 7 - (almost) always.\nPeople generally underestimate how much food they throw away, so this has to be taken with a grain of salt, but gives an indication.\nOverall, people indicate that their food very rarely goes bad before use, with the overall mean falling somewhere between almost never and rarely. Regardless, people do let food go off more often than it should happen.\n\n\n\n\n\n\n\n\n\n\nOverall frequency of each rating\n\n\nRating\nFrequency\n\n\n\n\nNever\n260\n\n\nAlmost Never\n348\n\n\nRarely\n200\n\n\nSometimes\n176\n\n\nFairly Often\n59\n\n\nVery Often\n11\n\n\nAlways\n3"
   },
   {
     "objectID": "pilot-script.html#correct-packaging-per-food-item",
     "href": "pilot-script.html#correct-packaging-per-food-item",
     "title": "pilot-analysis",
     "section": "Correct packaging per food item",
-    "text": "Correct packaging per food item\nThis shows whether food products were packaged correctly when stored. Below is more detailed information about how the products are stored.\nThis is not a great representation of the data as it is less wrong/correct and more perfect/good, as for many products it isn’t that clearly bad."
+    "text": "Correct packaging per food item\nThis shows whether food products were packaged correctly when stored. Below is more detailed information about how the products are stored. This question was only asked for foods where packaging matters.\nIt is split into best/adequate/poor, because in many cases there is an optimal storage condition, but alternatives are also not that bad.\nOf note are:\n\nBread is often stored airtight, but this traps moisture and will lead to it moulding quicker.\nA head of lettuce is best stored with the stalk in water, though this is very rarely done\nfresh herbs are best wrapped in a moist kitchen towel or placed in a glass of water, but many do not\nBananas are best stored with the top wrapped to stop ethylene from spreading, but no one indicated doing this."
   },
   {
     "objectID": "pilot-script.html#storage-specifics-per-food",
     "href": "pilot-script.html#storage-specifics-per-food",
     "title": "pilot-analysis",
     "section": "Storage specifics per food",
-    "text": "Storage specifics per food\nmaybe most interesting stuff:\n\nbread often stored airtight but it is best to allow some airflow, as airtight packaging may trap moisture and mould the bread. Though it’s also not a very big deal.\nlettuce: very few people use the ‘stalk in water’ technique for storing their lettuce, which could be prolong the shelf life.\nanana: no one wraps the top in foil to stop the produced ethylene from spreading, which may affect the bananas themselves and surrounding products\nberries: they are somewhat more often thrown away and also packaged suboptimally. Airtight packaging and washing should be avoided. The moisture will make them go mouldy quicker.\nherbs: packaging varies a lot, the best being in a glass of water of wrapped in a moist towel. Though herbs are not bought very often."
+    "text": "Storage specifics per food\nThis breaks down further how some of the products are stored."
   }
 ]
