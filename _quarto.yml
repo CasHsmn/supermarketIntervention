@@ -9,6 +9,7 @@ website:
   navbar:
     left:
       - pilot-script.qmd
+      - pilot-analysis.qmd
     tools:
       - icon: github
         href: https://github.com/CasHsmn/R_comb_habit
