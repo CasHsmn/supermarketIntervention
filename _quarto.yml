@@ -3,6 +3,7 @@ project:
   output-dir: docs
   render:
     - pilot-script.qmd
+    - pilot-analysis.qmd
 
 website:
   title: "Pilot survey"
