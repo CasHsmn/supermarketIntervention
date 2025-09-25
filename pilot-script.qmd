@@ -1,9 +1,10 @@
 ---
-title: "pilot-analysis"
+title: "pilot-script"
 format: html
 editor: visual
 author: Cas Huisman
 ---
+
 ```{r}
 #| label: load data & libraries
 #| echo: false
@@ -181,12 +182,14 @@ df <- df %>%
 ```
 
 ## Sample
+
 People were recruited who:
 
-* currently live in Austria
-* are the primary grocery shopper
+-   currently live in Austria
+-   are the primary grocery shopper
 
 Most respondents live in a 2-person household, no children.
+
 ```{r}
 #| echo: false
 #| label: sample-descriptives
@@ -198,9 +201,10 @@ table1(~ gender + age + adults + children, data = df)
 ```
 
 ## Purchase frequency
-This scale assesses how frequently people buy each of the foods. 1 - never, 2 - less than once a month, 3 - about once a month, 4 - 2-3 times a month, 5 - once a week, 6 - Multiple times a week. 
 
-Products should be bought quite frequently as that was a criteria for the initial selection. 
+This scale assesses how frequently people buy each of the foods. 1 - never, 2 - less than once a month, 3 - about once a month, 4 - 2-3 times a month, 5 - once a week, 6 - Multiple times a week.
+
+Products should be bought quite frequently as that was a criteria for the initial selection.
 
 ```{r}
 #| label: frequency-descriptives
@@ -247,18 +251,19 @@ ggplot(food_freq_summary, aes(x = reorder(food, mean), y = mean, fill = food)) +
 ```
 
 ## Correct storage per food item
+
 Below shows whether products were stored in the correct location. We distinguish five possible location:
 
-* Fridge
-* Freezer
-* Kitchen counter
-* Pantry or kitchen cupboard
-* Cellar
+-   Fridge
+-   Freezer
+-   Kitchen counter
+-   Pantry or kitchen cupboard
+-   Cellar
 
 Criteria are based on information from the Austrian [BMK](https://www.bmk.gv.at/themen/klima_umwelt/abfall/abfallvermeidung/lebensmittel/tipps/lagerung/obst_gemuese.html), [Gesundheit.gv.at](https://www.gesundheit.gv.at/leben/ernaehrung/lebensmittel/lagerung-von-lebensmitteln.html) and The [Netherlands Nutrition Centre](https://www.voedingscentrum.nl/nl/thema/kopen-koken-bewaren/eten-bewaren.aspx).
 
-* Cucumbers are often stored in the fridge. However, they are sensitive to cold and will only last up to 5 days in the fridge. They are best stored at 10-13 degrees, where they will last up to 3 weeks, but a cold place in the kitchen is still preferable over the fridge.
-* Apples are often stored on the kitchen counter. However, they are best kept between 2-7 degrees, in the fridge. This also makes it more likely they stay away from other fruits and vegetables which are sensitive to ethylene.
+-   Cucumbers are often stored in the fridge. However, they are sensitive to cold and will only last up to 5 days in the fridge. They are best stored at 10-13 degrees, where they will last up to 3 weeks, but a cold place in the kitchen is still preferable over the fridge.
+-   Apples are often stored on the kitchen counter. However, they are best kept between 2-7 degrees, in the fridge. This also makes it more likely they stay away from other fruits and vegetables which are sensitive to ethylene.
 
 Tomatoes are missing from the list, but may also be tricky. They are best stored outside of the fridge.
 
@@ -317,9 +322,10 @@ ggplot(loc_summary, aes(x = Product, y = Percent, fill = Response)) +
   theme_minimal()
 ```
 
-
 ## Storage per product
+
 This further breaks down where each product is stored.
+
 ```{r}
 #| label: compact-storage-loc
 #| echo: false 
@@ -405,6 +411,7 @@ ggplot(combined_data, aes(x = StorageOption, y = Proportion, fill = StorageOptio
 ```
 
 ## Foods going off
+
 This figure shows mean scores for the question *how often does a food goes bad before being able to finish it*, rated on a 7-point scale from 1 - Never to 7 - (almost) always.
 
 People generally underestimate how much food they throw away, so this has to be taken with a grain of salt, but gives an indication.
@@ -462,16 +469,17 @@ kable(rating_table, col.names = c("Rating", "Frequency"), caption = "Overall fre
 ```
 
 ## Correct packaging per food item
+
 This shows whether food products were packaged correctly when stored. Below is more detailed information about how the products are stored. This question was only asked for foods where packaging matters.
 
 It is split into best/adequate/poor, because in many cases there is an optimal storage condition, but alternatives are also not that bad.
 
 Of note are:
 
-* Bread is often stored airtight, but this traps moisture and will lead to it moulding quicker.
-* A head of lettuce is best stored with the stalk in water, though this is very rarely done 
-* fresh herbs are best wrapped in a moist kitchen towel or placed in a glass of water, but many do not
-* Bananas are best stored with the top wrapped to stop ethylene from spreading, but no one indicated doing this.
+-   Bread is often stored airtight, but this traps moisture and will lead to it moulding quicker.
+-   A head of lettuce is best stored with the stalk in water, though this is very rarely done
+-   fresh herbs are best wrapped in a moist kitchen towel or placed in a glass of water, but many do not
+-   Bananas are best stored with the top wrapped to stop ethylene from spreading, but no one indicated doing this.
 
 ```{r}
 #| echo: false
@@ -522,7 +530,9 @@ ggplot(pack_summary, aes(x = Product, y = Percent, fill = Response)) +
 ```
 
 ## Storage specifics per food
+
 This breaks down further how some of the products are stored.
+
 ```{r}
 #| label: storage-how
 #| echo: false

@@ -1,13 +1,11 @@
 ---
-title: "Pilot Study Analysis: Motivation and Onboarding Effects"
-author: "Your Name"
+title: "Effect of onboarding on motivation types"
 date: "`r Sys.Date()`"
 format: 
   html:
     code-fold: true
     code-summary: "Show code"
     code-tools: true
-editor: visual
 ---
 
 ## Setup

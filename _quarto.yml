@@ -3,14 +3,14 @@ project:
   output-dir: docs
   render:
     - pilot-script.qmd
-    - pilot-analysis.qmd
+    - pilot_analysis.qmd
 
 website:
   title: "Pilot survey"
   navbar:
     left:
       - pilot-script.qmd
-      - pilot-analysis.qmd
+      - pilot_analysis.qmd
     tools:
       - icon: github
         href: https://github.com/CasHsmn/R_comb_habit
